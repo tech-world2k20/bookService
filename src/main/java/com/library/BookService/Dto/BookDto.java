@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class BookDto {
     private Long id;
     private String title;
@@ -45,11 +45,11 @@ public class BookDto {
         this.author = author;
     }
 
-    public UUID getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(UUID isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -61,20 +61,20 @@ public class BookDto {
         this.publisher = publisher;
     }
 
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
-    }
-
     public LocalDate getPublicationDate() {
         return publicationDate;
     }
 
     public void setPublicationDate(LocalDate publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 
     public String getGenre() {
@@ -91,5 +91,20 @@ public class BookDto {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    @Override
+    public String toString() {
+        return "BookDto{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", isbn=" + isbn +
+                ", publisher='" + publisher + '\'' +
+                ", publicationDate=" + publicationDate +
+                ", totalPages=" + totalPages +
+                ", genre='" + genre + '\'' +
+                ", available=" + available +
+                '}';
     }*/
 }
