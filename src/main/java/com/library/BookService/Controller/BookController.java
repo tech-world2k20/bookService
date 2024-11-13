@@ -14,10 +14,10 @@ import java.util.List;
 public class BookController {
 
     @Autowired
-    private BookService bookService;
+    BookService bookService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDto> getBookById(@PathVariable("id") Long id){
+    public ResponseEntity<BookDto> getBookById(@PathVariable Long id){
         BookDto getBook = bookService.getBookById(id);
         return new ResponseEntity<>(getBook,HttpStatus.OK);
     }
@@ -41,9 +41,9 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBookById(@PathVariable("id") Long id){
+    public ResponseEntity<String> deleteBookById(@PathVariable Long id){
         bookService.deleteBookById(id);
         return new ResponseEntity<>("Book with Id "+ id +" Successfully deleted",HttpStatus.OK);
     }
-//
+
 }
