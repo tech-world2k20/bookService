@@ -3,6 +3,10 @@ package com.library.BookService.Controller;
 import com.library.BookService.Dto.BookDto;
 import com.library.BookService.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +27,16 @@ public class BookController {
     }
 
     @GetMapping("/getBooks")
-    public ResponseEntity<List<BookDto>> getAllBooks(){
-        List<BookDto> getBooks = bookService.getAllBooks();
+    public ResponseEntity<List<BookDto>> getBooks(){
+        List<BookDto> getBooks = bookService.getBooks();
         return new ResponseEntity<>(getBooks,HttpStatus.OK);
+    }
+
+    @GetMapping("getAllBooks")
+    public Page<BookDto> getAllBooks(@RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "10")int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("title").ascending());
+        return bookService.getAllBooks(pageable);
     }
 
     @PostMapping("/create")

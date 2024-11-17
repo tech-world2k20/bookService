@@ -8,6 +8,8 @@ import com.library.BookService.Mapper.ModelMapper;
 import com.library.BookService.Repo.BookRepo;
 import com.library.BookService.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,11 +36,17 @@ public class BookServiceImplementation implements BookService {
     }
 
     @Override
-    public List<BookDto> getAllBooks() {
+    public List<BookDto> getBooks() {
         return bookRepo.findAll()
                 .stream()
                 .map( (book) -> mapperClass.mapToDto(book) )
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<BookDto> getAllBooks(Pageable pageable) {
+        return bookRepo.findAll(pageable)
+                .map((book -> mapperClass.mapToDto(book)));
     }
 
     @Override
@@ -73,4 +81,6 @@ public class BookServiceImplementation implements BookService {
         );
         bookRepo.deleteById(id);
     }
+
+
 }
