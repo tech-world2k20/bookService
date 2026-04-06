@@ -2,6 +2,7 @@ package com.library.BookService.Controller;
 
 import com.library.BookService.Dto.BookDto;
 import com.library.BookService.Service.BookService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/book/api")
+@Slf4j
 public class BookController {
 
     @Autowired
@@ -18,6 +20,7 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable Long id){
+        log.info("getting book by id : {}", id);
         BookDto getBook = bookService.getBookById(id);
         return new ResponseEntity<>(getBook,HttpStatus.OK);
     }

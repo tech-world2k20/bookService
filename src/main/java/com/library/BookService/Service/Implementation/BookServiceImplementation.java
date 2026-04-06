@@ -46,7 +46,7 @@ public class BookServiceImplementation implements BookService {
         Book getBook = bookRepo.findById(id).orElseThrow(
                 () -> new BookNotFoundException("Book","Id",id)
         );
-        return mapperClass.mapToDto(getBook);
+        return ModelMapper.mapToDto(getBook);
     }
 
     @Override
